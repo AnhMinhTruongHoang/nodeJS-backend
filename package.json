@@ -1,0 +1,34 @@
+{
+  "name": "full-backend-zero",
+  "version": "1.0.0",
+  "description": "Fullstack backend zero",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnhMinhTruongHoang/nodeJS-backend.git"
+  },
+  "keywords": [
+    "nodejs",
+    "react"
+  ],
+  "author": "minh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnhMinhTruongHoang/nodeJS-backend.git"
+  },
+  "homepage": "https://github.com/AnhMinhTruongHoang/nodeJS-backend.git",
+  "dependencies": {
+    "api-query-params": "5.4.0",
+    "dotenv": "16.0.3",
+    "ejs": "3.1.8",
+    "express": "4.18.2",
+    "full-backend-zero": "file:"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.20"
+  }
+}
