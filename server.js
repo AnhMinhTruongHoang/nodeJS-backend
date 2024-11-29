@@ -1,18 +1,35 @@
-//Load HTTP module (thư viện đã có sẵn khi cài đặt node.js)
-const http = require("http");
+const express = require('express'); //commonjs
+const path = require('path'); //commonjs
+require('dotenv').config();
 
-const hostname = "127.0.0.1"; //cái này === http://localhost
-const port = 3000;
+// import express from 'express';//es modules
 
-//Create HTTP server and listen on port 3000 for requests
-const server = http.createServer((req, res) => {
-  //Set the response HTTP header with HTTP status and Content type
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello !!!");
-});
 
-//listen for request on port 3000, and as a callback function have the port listened on logged
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const app = express();// app express
+const port = process.env.PORT || 8888; //port => hardcode . uat .prod
+const hostname = process.env.HOST_NAME;
+
+//config template engine
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs')
+
+//config static files: image/css/js
+app.use(express.static(path.join(__dirname, 'public')));
+
+//khai báo route
+app.get('/', (req, res) => {
+    res.send('Hello World vs Hoi Dan IT & Eric! & nodemon')
+})
+
+app.get('/abc', (req, res) => {
+    res.send('check ABC')
+})
+
+app.get('/hoidanit', (req, res) => {
+    // res.send('<h1>hoi dan it voi Eric </h1>')
+    res.render('sample.ejs')
+})
+
+app.listen(port, hostname, () => {
+    console.log(`Example app listening on port ${port}`)
+})
