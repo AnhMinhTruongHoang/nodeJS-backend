@@ -1,15 +1,12 @@
-
-
+const connection = require("../config/dataBase");
 
 const getHomePage = (req, res) => {
-  res.send("hello world");
+  return res.render("homePage.ejs");
 };
 
 const getABC = (req, res) => {
   res.send("check abc");
 };
-
-
 
 module.exports = {
   getHomePage,

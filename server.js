@@ -4,10 +4,6 @@ const express = require("express"); //commonjs
 const webRouter = require("./src/routes/web");
 const connection = require("./src/config/dataBase");
 
-/////////// query
-connection.query("select * from Users u", function (err, results, fields) {
-  console.log(">>>results= ", results); // results contains rows returned by server
-});
 
 // import express from 'express';//es modules
 const app = express(); // app express
