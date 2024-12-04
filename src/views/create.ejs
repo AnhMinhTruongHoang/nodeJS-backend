@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>Create user</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -106,81 +106,37 @@
       button:hover {
         background-color: #028a55;
       }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-      }
-      th{
-        font-size: larger;
-        color: chartreuse;
-      }
-
-        tr:hover {background-color: lightcyan;}
-
     </style>
- 
-</head>
+  </head>
 
   <body>
     <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <a href="/create">create-user</a>
-    
-    </div>  
-
-    <div style=" margin-top: 40px;">
-      <div style="text-align: center; color: #04aa6d; font-size: larger;"> List Users</div>
-      <hr/>
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th> Name</th>
-            <th>City</th>
-          </tr>
-          <tr>
-            <td>Peter</td>
-            <td>Griffin</td>
-            <td>$100</td>
-            <td>$100</td>
-          </tr>
-          <tr>
-            <td>Lois</td>
-            <td>Griffin</td>
-            <td>$150</td>
-            <td>$150</td>
-          </tr>
-          <tr>
-            <td>Joe</td>
-            <td>Swanson</td>
-            <td>$300</td>
-            <td>$300</td>
-          </tr>
-         
-          <tr>
-            <td>Cleveland</td>
-            <td>Brown</td>
-            <td>$250</td>
-            <td>$250</td>
-          </tr>
-       
-        </table>
+      <a href="/">Home</a>
+      <a href="/create" class="active">create-user</a>
     </div>
-  
-   </div>
-     
-   
-    </div> 
- 
- 
+
+    <div class="form">
+      <form action="/create-user" method="post">
+        <fieldset>
+          <legend>Add new user</legend>
+
+          <div class="input-group">
+            <label>Email:</label>
+            <input type="email" name="email" id="email" />
+          </div>
+          <div class="input-group">
+            <label>Name:</label>
+            <input type="text" name="name" />
+          </div>
+          <div class="input-group">
+            <label>City:</label>
+            <input type="text" name="city" />
+          </div>
+          <div>
+            <button>Save</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </body>
 </html>
-
-

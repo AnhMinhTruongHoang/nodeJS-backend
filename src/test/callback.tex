@@ -1,0 +1,16 @@
+const postCreateUser = (req, res) => {
+  let { email, name, city } = req.body;
+
+  console.log("req body>>>", email, "name:", name, "city:", city);
+
+  connection.query(
+    `INSERT INTO Users (email, name, city)
+     VALUES (?, ?, ?)`,
+    [email, name, city],
+    function (err, results) {
+      res.send("Create user success");
+    }
+  );
+};
+
+// const [results, fields] = await connection.query("select * from Users u"); asyn/await
