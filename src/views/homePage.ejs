@@ -135,7 +135,8 @@
     
     </div>  
 
-    <div style=" margin-top: 40px;">
+    <div style=" margin-top: 40px;" class="table-container">
+        <%= JSON.stringify(listUsers) %>
       <div style="text-align: center; color: #04aa6d; font-size: larger;"> List Users</div>
       <hr/>
         <table>
@@ -144,12 +145,22 @@
             <th>Email</th>
             <th> Name</th>
             <th>City</th>
+            <th>Action</th>
           </tr>
           <tr>
             <td>Peter</td>
             <td>Griffin</td>
             <td>$100</td>
             <td>$100</td>
+            <td>
+              <button>Edit</button>
+             
+            </td>
+            <td>
+              <button>Delete</button>
+             
+            </td>
+          
           </tr>
           <tr>
             <td>Lois</td>
