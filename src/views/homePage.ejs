@@ -125,7 +125,7 @@
           <th>Email</th>
           <th>Name</th>
           <th>City</th>
-          <th>Actions</th>
+          <th style="text-align: center">Actions</th>
         </tr>
 
         <% listUsers.forEach(function (user) { %>
@@ -134,9 +134,22 @@
           <td><%= user.email %></td>
           <td><%= user.name %></td>
           <td><%= user.city %></td>
-          <td>
-            <a href="/update/<%= user.id %>">Edit</a>
-            <button>Delete</button>
+
+          <td style="text-align: center">
+            <form
+              action="/update/<%= user.id %>"
+              method="get"
+              style="display: inline"
+            >
+              <button>Edit</button>
+            </form>
+            <form
+              action="/delete-user/<%= user.id %>"
+              method="post"
+              style="display: inline"
+            >
+              <button>Delete</button>
+            </form>
           </td>
         </tr>
         <% }); %>

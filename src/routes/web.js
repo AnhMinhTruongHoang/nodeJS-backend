@@ -7,6 +7,8 @@ const {
   getCreatePage,
   getUpdatePage,
   postUpdateUser,
+  postDeleteUser,
+  postRemoveUser,
 } = require("../controllers/homeController");
 
 //khai báo route
@@ -14,12 +16,16 @@ router.get("/", getHomePage);
 
 router.get("/abc", getABC);
 
+router.get("/create", getCreatePage);
+
 router.post("/create-user", postCreateUser);
+
+router.get("/update/:id", getUpdatePage);
 
 router.post("/update-user/", postUpdateUser);
 
-router.get("/create", getCreatePage);
+router.post("/delete-user/:id", postDeleteUser);
 
-router.get("/update/:id", getUpdatePage);
+router.post("/delete-user/", postRemoveUser);
 
 module.exports = router;
