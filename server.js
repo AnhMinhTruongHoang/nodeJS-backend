@@ -3,6 +3,7 @@ const configViewEngine = require("./src/config/viewEngine");
 const express = require("express"); //commonjs
 const webRouter = require("./src/routes/web");
 const connection = require("./src/config/dataBase");
+const Kitten = require("./src/models/Kittens");
 
 // import express from 'express';//es modules
 const app = express(); // app express
@@ -17,6 +18,9 @@ configViewEngine(app);
 
 //////// router
 app.use("/", webRouter);
+
+const cat = new Kitten({ name: "minh cats" });
+cat.save();
 
 ///test connection
 (async () => {
