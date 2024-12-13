@@ -18,6 +18,10 @@ configViewEngine(app);
 //////// router
 app.use("/", webRouter);
 
-app.listen(port, hostname, () => {
-  console.log(`Example router listening on port ${port}`);
-});
+///test connection
+(async () => {
+  await connection();
+  app.listen(port, hostname, () => {
+    console.log(`DB-listening on port ${port}`);
+  });
+})();
