@@ -9,7 +9,7 @@ const {
 } = require("../services/CRUD_service");
 
 const getHomePage = async (req, res) => {
-  let results = [];
+  let results = await User.find({});
 
   return res.render("homePage.ejs", { listUsers: results });
 };
@@ -33,13 +33,13 @@ const postCreateUser = async (req, res) => {
     city: city,
   });
 
-  res.send("done !");
+  res.redirect("/");
 }; /////////// create logic
 
 const getUpdatePage = async (req, res) => {
   const userId = req.params.id;
 
-  let user = await getUserById(userId);
+  let user = await User.findById(userId).exec();
 
   res.render("update.ejs", { userUpdate: user });
 }; ////// get update page
@@ -47,23 +47,25 @@ const getUpdatePage = async (req, res) => {
 const postUpdateUser = async (req, res) => {
   let { email, name, city, userId } = req.body;
 
-  await updateUserById(email, city, name, userId);
-
+  await User.updateOne(
+    { _id: userId },
+    { name: name, email: email, city: city }
+  );
   res.redirect("/");
 }; /////////////// update logic
 
 const postDeleteUser = async (req, res) => {
   const userId = req.params.id;
 
-  let user = await getUserById(userId);
+  let user = await User.findById(userId).exec();
 
   res.render("delete.ejs", { userUpdate: user });
 }; ////////////// delete form
 
 const postRemoveUser = async (req, res) => {
-  let { userId } = req.body;
+  const id = req.body.userId;
 
-  await deleteUserById(userId);
+  await User.deleteOne({ _id: id });
 
   res.redirect("/");
 }; /////////// delete action
