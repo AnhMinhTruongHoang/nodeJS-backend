@@ -60,7 +60,7 @@ const postDeleteUser = async (req, res) => {
   let user = await User.findById(userId).exec();
 
   res.render("delete.ejs", { userUpdate: user });
-}; ////////////// delete form
+}; ////////////// get delete form
 
 const postRemoveUser = async (req, res) => {
   const id = req.body.userId;
