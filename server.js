@@ -2,6 +2,7 @@ require("dotenv").config();
 const configViewEngine = require("./src/config/viewEngine");
 const express = require("express"); //commonjs
 const webRouter = require("./src/routes/web");
+const routerApi = require("./src/routes/api");
 const connection = require("./src/config/dataBase");
 
 // import express from 'express';//es modules
@@ -17,11 +18,10 @@ configViewEngine(app);
 
 //////// router
 app.use("/", webRouter);
-
-///test connection
+app.use("/v1/api/", routerApi);
 (async () => {
   await connection();
   app.listen(port, hostname, () => {
     console.log(`DB-listening on port ${port}`);
   });
-})();
+})(); ///test connection

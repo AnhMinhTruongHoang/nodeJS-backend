@@ -1,5 +1,4 @@
 const connection = require("../config/dataBase");
-const User = require("../models/User");
 const {
   getAllUsers,
   getUserById,
@@ -7,6 +6,7 @@ const {
   deleteUserById,
   createNewUser,
 } = require("../services/CRUD_service");
+const User = require("../models/User");
 
 const getHomePage = async (req, res) => {
   let results = await User.find({});
