@@ -3,12 +3,16 @@ const configViewEngine = require("./src/config/viewEngine");
 const express = require("express"); //commonjs
 const webRouter = require("./src/routes/web");
 const routerApi = require("./src/routes/api");
+const fileUpload = require("express-fileupload");
 const connection = require("./src/config/dataBase");
 
 // import express from 'express';//es modules
 const app = express(); // app express
 const port = process.env.PORT || 8888; //port => hardcode . uat .prod
 const hostname = process.env.HOST_NAME;
+
+// default options upload files
+app.use(fileUpload());
 
 ///config urlencoded
 app.use(express.json());
