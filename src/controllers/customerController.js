@@ -1,5 +1,8 @@
 const { uploadSingleFile } = require("../services/fileService"); // Import chức năng tải tệp lên từ fileService.
-const { createCustomerService } = require("../services/customerService"); // Import chức năng tạo khách hàng từ customerService.
+const {
+  createCustomerService,
+  createListCustomerService,
+} = require("../services/customerService"); // Import chức năng tạo khách hàng từ customerService.
 
 module.exports = {
   // Hàm xử lý yêu cầu POST để tạo khách hàng mới
@@ -33,14 +36,20 @@ module.exports = {
     let customer = await createCustomerService(customerData);
 
     // Trả về phản hồi JSON thành công cho phía client
-    return res.status(200).json({
-      EC: 0, // Mã lỗi (0 có nghĩa là không có lỗi)
-      data: customer, // Dữ liệu của khách hàng vừa được tạo
-    });
   },
   ///////////////////////////////
   postCustomerList: async (req, res) => {
-    console.log("check list", req.body);
-    res.send("list");
+    let customers = await createListCustomerService(req.body.customers);
+    if (customers) {
+      return res.status(200).json({
+        EC: 0, // Mã lỗi (0 có nghĩa là không có lỗi)
+        data: customers,
+      });
+    } else {
+      return res.status(200).json({
+        EC: -1, // Mã lỗi (-1 có nghĩa là không có lỗi)
+        data: customers,
+      });
+    }
   },
 };
