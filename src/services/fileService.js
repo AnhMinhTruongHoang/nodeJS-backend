@@ -1,26 +1,34 @@
 const path = require("path");
+const fs = require("fs");
 
 const uploadSingleFile = async (fileObject) => {
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let uploadPath = path.resolve(__dirname + "../public/images/upload");
-
-  let exName = path.extname(fileObject.name);
-
-  let baseName = path.basename(fileObject.name, exName);
-
-  let finalName = `${baseName}=${Date.now()}${exName}`;
-  let finalPath = `${uploadPath}/${finalName}`;
-
-  // Use the mv() method to place the file somewhere on your server
   try {
+    // Define upload directory
+    let uploadPath = path.resolve(__dirname, "../public/images/upload");
+
+    // Ensure the upload directory exists
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+
+    // Extract file extension and base name
+    let exName = path.extname(fileObject.name);
+    let baseName = path.basename(fileObject.name, exName);
+
+    // Create unique file name
+    let finalName = `${baseName}-${Date.now()}${exName}`;
+    let finalPath = path.join(uploadPath, finalName);
+
+    // Move the file to the target directory
     await fileObject.mv(finalPath);
+
     return {
       status: "success",
       path: finalName,
       error: null,
     };
   } catch (err) {
-    console.log("check err", err);
+    console.error("File upload error:", err);
     return {
       status: "failed",
       path: null,
@@ -31,22 +39,32 @@ const uploadSingleFile = async (fileObject) => {
 
 const uploadMultipleFiles = async (filesArr) => {
   try {
+    // Define upload directory
     let uploadPath = path.resolve(__dirname, "../public/images/upload");
+
+    // Ensure the upload directory exists
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+
     let resultArr = [];
     let countSuccess = 0;
+
+    // Process each file in the array
     for (let i = 0; i < filesArr.length; i++) {
-      //get image extension
-      let extName = path.extname(filesArr[i].name);
-
-      //get image's name (without extension)
-      let baseName = path.basename(filesArr[i].name, extName);
-
-      //create final path: eg: /upload/your-image.png
-      let finalName = `${baseName}-${Date.now()}${extName}`;
-      let finalPath = `${uploadPath}/${finalName}`;
-
       try {
+        // Extract file extension and base name
+        let exName = path.extname(filesArr[i].name);
+        let baseName = path.basename(filesArr[i].name, exName);
+
+        // Create unique file name
+        let finalName = `${baseName}-${Date.now()}${exName}`;
+        let finalPath = path.join(uploadPath, finalName);
+
+        // Move the file to the target directory
         await filesArr[i].mv(finalPath);
+
+        // Log success for the file
         resultArr.push({
           status: "success",
           path: finalName,
@@ -55,6 +73,7 @@ const uploadMultipleFiles = async (filesArr) => {
         });
         countSuccess++;
       } catch (err) {
+        // Log failure for the file
         resultArr.push({
           status: "failed",
           path: null,
@@ -69,7 +88,12 @@ const uploadMultipleFiles = async (filesArr) => {
       detail: resultArr,
     };
   } catch (error) {
-    console.log(error);
+    console.error("Multiple file upload error:", error);
+    return {
+      countSuccess: 0,
+      detail: [],
+      error: JSON.stringify(error),
+    };
   }
 };
 

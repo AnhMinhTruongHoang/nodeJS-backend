@@ -60,6 +60,7 @@ const postUploadSingleFile = async (req, res) => {
     return res.status(400).send("No file uploaded");
   }
 
+
   try {
     let result = await uploadSingleFile(req.files.image);
     console.log("result", result);
