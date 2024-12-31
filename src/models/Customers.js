@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoose_delete = require("mongoose-delete");
 
 const CustomersSchema = new mongoose.Schema(
   {
@@ -9,8 +10,17 @@ const CustomersSchema = new mongoose.Schema(
     image: String,
     description: String,
   },
-  { timestamps: true }
+  {
+    timestamps: true, ///////// update and create time
+    // statics: {
+    //   findByName(name) {
+    //     return this.find({ name: new RegExp(name, "i") }); ///static method
+    //   },
+    // },
+  }
 );
+
+CustomersSchema.plugin(mongoose_delete, { overrideMethods: "all" }); /// ko lay user deleted
 
 const Customers = mongoose.model("customer", CustomersSchema);
 

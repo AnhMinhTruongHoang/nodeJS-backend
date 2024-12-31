@@ -28,7 +28,47 @@ const createListCustomerService = async (arr) => {
   }
 };
 
+/////////////////
+
+const getCustomerList = async () => {
+  try {
+    let result = await Customers.find({});
+    return result;
+  } catch (error) {
+    console.log("error:", error);
+    return null;
+  }
+};
+
+////////////////// update customer
+const updateAnCustomerService = async (id, name, email, address) => {
+  try {
+    let result = await Customers.updateOne(
+      { _id: id },
+      { name, email, address }
+    );
+    return result;
+  } catch (error) {
+    console.log("error:", error);
+    return null;
+  }
+}; ///////////
+
+const deleteCustomerService = async (id) => {
+  try {
+    let result = await Customers.deleteById(id); /// soft delete
+
+    return result;
+  } catch (error) {
+    console.log("error:", error);
+    return null;
+  }
+};
+
 module.exports = {
   createCustomerService,
   createListCustomerService,
+  getCustomerList,
+  updateAnCustomerService,
+  deleteCustomerService,
 };

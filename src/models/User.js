@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoose_delete = require("mongoose-delete");
 
 //// create db
 const userSchema = new mongoose.Schema({
@@ -7,6 +8,8 @@ const userSchema = new mongoose.Schema({
   city: String,
 });
 
-const User = mongoose.model('user', userSchema);
+userSchema.plugin(mongoose_delete);
+
+const User = mongoose.model("user", userSchema);
 
 module.exports = User;

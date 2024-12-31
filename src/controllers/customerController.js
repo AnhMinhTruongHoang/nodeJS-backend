@@ -2,6 +2,9 @@ const { uploadSingleFile } = require("../services/fileService"); // Import chứ
 const {
   createCustomerService,
   createListCustomerService,
+  getCustomerList,
+  updateAnCustomerService,
+  deleteCustomerService,
 } = require("../services/customerService"); // Import chức năng tạo khách hàng từ customerService.
 
 module.exports = {
@@ -47,9 +50,47 @@ module.exports = {
       });
     } else {
       return res.status(200).json({
-        EC: -1, // Mã lỗi (-1 có nghĩa là không có lỗi)
+        EC: -1, // Mã lỗi (-1 có nghĩa là có lỗi)
         data: customers,
       });
     }
+  },
+  //////////////////////////
+  getAllCustomer: async (req, res) => {
+    let customers = await getCustomerList();
+
+    if (customers) {
+      return res.status(200).json({
+        EC: 0, // Mã lỗi (0 có nghĩa là không có lỗi)
+        data: customers,
+      });
+    } else {
+      return res.status(200).json({
+        EC: -1, // Mã lỗi (-1 có nghĩa là có lỗi)
+        data: customers,
+      });
+    }
+  }, ///////////////
+
+  putUpdateAnCustomer: async (req, res) => {
+    let { id, name, email, address } = req.body;
+
+    let result = await updateAnCustomerService(id, name, email, address);
+
+    return res.status(200).json({
+      EC: 0,
+      data: result,
+    });
+  }, ///////////////
+
+  deleteAnCustomer: async (req, res) => {
+    let { id } = req.body;
+
+    let result = await deleteCustomerService(id);
+
+    return res.status(200).json({
+      EC: 0,
+      data: result,
+    });
   },
 };

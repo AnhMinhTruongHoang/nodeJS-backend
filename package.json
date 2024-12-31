@@ -29,6 +29,7 @@
     "express-fileupload": "1.4.0",
     "full-backend-zero": "file:",
     "mongoose": "^8.8.4",
+    "mongoose-delete": "^1.0.2",
     "mysql2": "2.3.3"
   },
   "devDependencies": {
