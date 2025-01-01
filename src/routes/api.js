@@ -42,8 +42,15 @@ routerAPI.put("/customers", putUpdateAnCustomer);
 routerAPI.delete("/customers", deleteAnCustomer);
 
 routerAPI.get("/info", (req, res) => {
+  console.log(req.query);
   return res.status(200).json({
     data: req.query,
+  });
+});
+routerAPI.get("/info/:name/:address", (req, res) => {
+  console.log(req.params);
+  return res.status(200).json({
+    data: req.params,
   });
 });
 

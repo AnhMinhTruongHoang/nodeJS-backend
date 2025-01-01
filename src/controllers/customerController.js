@@ -6,6 +6,7 @@ const {
   updateAnCustomerService,
   deleteCustomerService,
 } = require("../services/customerService"); // Import chức năng tạo khách hàng từ customerService.
+const aqp = require("api-query-params");
 
 module.exports = {
   // Hàm xử lý yêu cầu POST để tạo khách hàng mới
@@ -57,8 +58,18 @@ module.exports = {
   },
   //////////////////////////
   getAllCustomer: async (req, res) => {
-    let customers = await getCustomerList();
+    let limit = req.query.limit;
+    let page = req.query.page;
+    let name = req.query.name;
+    let customers = null;
 
+    if (limit && page) {
+      console.log("query", req.query);
+      customers = await getCustomerList(limit, page, name, req.query);
+    } else {
+      customers = await getCustomerList();
+    } //////////////////// xet so trang
+    /////////////////////
     if (customers) {
       return res.status(200).json({
         EC: 0, // Mã lỗi (0 có nghĩa là không có lỗi)
