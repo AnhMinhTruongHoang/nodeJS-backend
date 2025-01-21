@@ -19,6 +19,10 @@ const {
   deleteAnCustomer,
 } = require("../controllers/customerController");
 
+////////////////
+
+const { postCreateProject } = require("../controllers/projectController");
+
 routerAPI.get("/Users", getUserApi);
 
 routerAPI.post("/Users", postCreateUserAPI);
@@ -40,6 +44,8 @@ routerAPI.get("/customers", getAllCustomer);
 routerAPI.put("/customers", putUpdateAnCustomer);
 
 routerAPI.delete("/customers", deleteAnCustomer);
+
+routerAPI.post("/project", postCreateProject);
 
 routerAPI.get("/info", (req, res) => {
   console.log(req.query);
