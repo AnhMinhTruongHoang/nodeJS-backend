@@ -1,4 +1,5 @@
 const { uploadSingleFile } = require("../services/fileService"); // Import chức năng tải tệp lên từ fileService.
+const Joi = require("joi");
 const {
   createCustomerService,
   createListCustomerService,
@@ -6,13 +7,14 @@ const {
   updateAnCustomerService,
   deleteCustomerService,
 } = require("../services/customerService"); // Import chức năng tạo khách hàng từ customerService.
-const aqp = require("api-query-params");
+//////////////////////////
 
 module.exports = {
   // Hàm xử lý yêu cầu POST để tạo khách hàng mới
   postCreateCustomer: async (req, res) => {
     // Lấy thông tin khách hàng từ body của request
-    let { name, address, phone, email, description, image } = req.body;
+    let { name, address, phone, email, description } = req.body;
+    
 
     let imageURL = ""; // Khởi tạo biến để lưu đường dẫn hình ảnh
 

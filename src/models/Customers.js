@@ -6,7 +6,11 @@ const CustomersSchema = new mongoose.Schema(
     name: { type: String, required: true },
     address: String,
     phone: Number,
-    email: { type: String, required: true },
+    email: {
+      type: String,
+      required: true,
+      match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address"],
+    },
     image: String,
     description: String,
   },
